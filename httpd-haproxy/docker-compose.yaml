@@ -1,0 +1,93 @@
+version: "3.9"
+
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 172.100.0.0/24
+  backend:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  loadbalancer:
+    image: 'haproxy:lts'
+    container_name: lb1
+    hostname: lb1
+    networks:
+      backend:
+      frontend:
+        ipv4_address: 172.100.0.254
+    ports:
+        - "80"
+        - "70" # management console
+    volumes:
+      - ./files/haproxy/lb1/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  httpd_1:
+    image: 'ubuntu/apache2:latest'
+    container_name: "${name}1"  # variables are stored in .env file
+    hostname: "${name}1"
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./files/web1:/var/www/html
+
+  httpd_2:
+    image: 'ubuntu/apache2:latest'
+    container_name: "${name}2"
+    hostname: "${name}2"
+    networks:
+      backend:
+        ipv4_address: 172.20.0.20
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./files/web2:/var/www/html
+
+  httpd_3:
+    image: 'ubuntu/apache2:latest'
+    container_name: "${name}3"
+    hostname: "${name}3"
+    networks:
+      backend:
+        ipv4_address: 172.20.0.30
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./files/web3:/var/www/html
+
+  httpd_4:
+    image: 'ubuntu/apache2:latest'
+    container_name: "${name}4"
+    hostname: "${name}4"
+    networks:
+      backend:
+        ipv4_address: 172.20.0.40
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./files/web4:/var/www/html
+
+  httpd_5:
+    image: 'ubuntu/apache2:latest'
+    container_name: "${name}5"
+    hostname: "${name}5"
+    networks:
+      backend:
+        ipv4_address: 172.20.0.50
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./files/web5:/var/www/html
+
