@@ -1,8 +1,9 @@
-## Creates two networks, one for the load balancer and an internal one for the web servers
-## The two networks are bridged in the loadbalancer container.
-## 
+# Creates two networks, one for the load balancer and an internal one for the web servers
+# The two networks are bridged in the loadbalancer container
+# It then creates 5 apache2 web server containers
+#
 
-version: "3.9"
+version: '3.9'
 
 networks:
   frontend:
@@ -25,15 +26,15 @@ services:
       frontend:
         ipv4_address: 172.100.0.254
     ports:
-        - "80"
-        - "70" # management console
+      - "80"
+      - "70" # management console
     volumes:
       - ./files/haproxy/lb1/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
   httpd_1:
     image: 'ubuntu/apache2:latest'
-    container_name: "${name}1"  # variables are stored in .env file
-    hostname: "${name}1"
+    container_name: ${name}1  # variables are stored in .env file
+    hostname: ${name}1
     networks:
       backend:
         ipv4_address: 172.20.0.10
@@ -45,8 +46,8 @@ services:
 
   httpd_2:
     image: 'ubuntu/apache2:latest'
-    container_name: "${name}2"
-    hostname: "${name}2"
+    container_name: ${name}2
+    hostname: ${name}2
     networks:
       backend:
         ipv4_address: 172.20.0.20
@@ -58,8 +59,8 @@ services:
 
   httpd_3:
     image: 'ubuntu/apache2:latest'
-    container_name: "${name}3"
-    hostname: "${name}3"
+    container_name: ${name}3
+    hostname: ${name}3
     networks:
       backend:
         ipv4_address: 172.20.0.30
@@ -71,8 +72,8 @@ services:
 
   httpd_4:
     image: 'ubuntu/apache2:latest'
-    container_name: "${name}4"
-    hostname: "${name}4"
+    container_name: ${name}4
+    hostname: ${name}4
     networks:
       backend:
         ipv4_address: 172.20.0.40
@@ -84,8 +85,8 @@ services:
 
   httpd_5:
     image: 'ubuntu/apache2:latest'
-    container_name: "${name}5"
-    hostname: "${name}5"
+    container_name: ${name}5
+    hostname: ${name}5
     networks:
       backend:
         ipv4_address: 172.20.0.50
