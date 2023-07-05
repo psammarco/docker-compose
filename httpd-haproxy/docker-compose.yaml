@@ -1,3 +1,7 @@
+## Creates two networks, one for the load balancer and an internal one for the web servers
+## The two networks are bridged in the loadbalancer container.
+## 
+
 version: "3.9"
 
 networks:
