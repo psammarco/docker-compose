@@ -1,0 +1,27 @@
+
+{
+  "users": [
+    {
+      "name": "landscape",
+      "_comment": "passwd hashed with 'rabbitmqctl hash_password'",
+      "password_hash": "ULFXHaup4vXlNsiU6ZXfchqSN/DB0fXOfReOS7XVmQruAeOY",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": ["administrator"]
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "landscape"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "landscape",
+      "vhost": "landscape",
+      "configure": ".*",
+      "read": ".*",
+      "write": ".*"
+    }
+  ]
+}
+

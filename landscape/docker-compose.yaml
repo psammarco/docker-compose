@@ -1,0 +1,146 @@
+version: '3.9'
+
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 172.100.0.0/24
+  backend:
+    ipam:
+      config:
+        - subnet: 172.10.0.0/24
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+
+services: 
+  loadbalancer:
+    image: 'haproxy:lts'
+    container_name: lb1
+    hostname: lb1
+    networks:
+      backend:
+      frontend:
+        ipv4_address: 172.100.0.254
+    ports:
+      - "80"
+      - "70" # management console
+    volumes:
+      - ./conf/haproxy/lb1/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  postgres_srv:
+    build:
+      context: ./conf/postgres_srv
+      dockerfile: Dockerfile
+    container_name: postgres_srv 
+    hostname: postgres_srv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.10
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: landscape_superuser
+      POSTGRES_USER: landscape_superuser
+      POSTGRES_PASSWORD: securePassword
+      POSTGRES_HOST_AUTH_METHOD: md5
+    volumes:
+      - ./conf/postgres_srv/init:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "localhost", "-U", "postgres"]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+ 
+  httpdb:
+    image: 'adminer:latest'
+    container_name: adminer
+    hostname: adminer 
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.20
+    ports:
+      - "8080"
+
+  rabbitmq:
+    image: 'rabbitmq:management'
+    container_name: rabbitmq
+    hostname: rabbitmq
+    networks:
+      backend:
+        ipv4_address: 172.10.0.30
+    ports:
+      - "5672"
+      - "15672" # management port
+    volumes:
+      - ./conf/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./conf/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+
+  app-server:
+    build:
+      context: ./conf/app-server
+      dockerfile: Dockerfile
+    container_name: appsrv
+    hostname: appsrv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.40
+    environment:
+      SERVICE: APPSERVER
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  message-server:
+    build:
+      context: ./conf
+      dockerfile: ./message-server/Dockerfile
+    container_name: msgsrv
+    hostname: msgsrv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.50
+    environment:
+      SERVICE: MSGSERVER
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_started
+
+  ping-server:
+    build:
+      context: ./conf
+      dockerfile: ./ping-server/Dockerfile
+    container_name: pingsrv
+    hostname: pingsrv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.60
+    environment:
+      SERVICE: PINGSERVER
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_started
+
