@@ -13,6 +13,11 @@ networks:
 volumes:
   postgres_data:
   rabbitmq_data:
+  landscape_data:
+  landscape_logs:
+  landscape-server_data:
+  landscape-server_logs:
+  
 
 services: 
   loadbalancer:
@@ -103,6 +108,11 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
 
   message-server:
     build:
@@ -123,6 +133,11 @@ services:
         condition: service_healthy
       app-server:
         condition: service_started
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
 
   ping-server:
     build:
@@ -143,4 +158,8 @@ services:
         condition: service_healthy
       app-server:
         condition: service_started
-
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server

@@ -14,8 +14,6 @@ RUN apt-get dist-upgrade -y && \
 
 # Creating logging structure
 RUN mkdir /var/log/landscape-server
-RUN mkdir -p /data/landscape
-RUN mkdir /data/landscape-server
 RUN mkdir /var/run/landscape
 RUN touch /var/log/landscape-server/update-alerts.log \
       /var/log/landscape-server/process-alerts.log \
