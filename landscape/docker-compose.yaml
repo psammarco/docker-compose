@@ -218,3 +218,28 @@ services:
       - landscape_logs:/var/log/landscape
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
+
+  api-server:
+    build:
+      context: ./conf
+      dockerfile: ./api-server/Dockerfile
+    container_name: apisrv
+    hostname: apisrv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.90
+    environment:
+      SERVICE: APISERVER
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_healthy
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
