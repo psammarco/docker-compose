@@ -163,3 +163,29 @@ services:
       - landscape_logs:/var/log/landscape
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
+
+  job-handler:
+    build:
+      context: ./conf
+      dockerfile: ./job-handler/Dockerfile
+    container_name: jobsrv
+    hostname: jobsrv 
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.70
+    environment:
+      SERVICE: JOBHANDLER
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_started
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
+
