@@ -269,3 +269,28 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
 
+  package-search:
+    build:
+      context: ./conf
+      dockerfile: ./package-search/Dockerfile
+    container_name: pkgsrc_srv
+    hostname: pkgsrc_srv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.110
+    environment:
+      SERVICE: PACKAGESEARCH
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_healthy
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
+

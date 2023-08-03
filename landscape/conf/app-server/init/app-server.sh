@@ -3,7 +3,7 @@
 # ----------------------------------------------------------
 # Start landcape-server schema 
 # ----------------------------------------------------------
-printf "Starting landcape-server setup\n"
+printf " * Starting landcape-server setup\n"
 /usr/bin/setup-landscape-server
 
 # ----------------------------------------------------------

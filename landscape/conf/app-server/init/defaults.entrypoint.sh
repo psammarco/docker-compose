@@ -20,7 +20,7 @@ printf "Service ${SERVICE} enabled.\n"
 chown -R landscape:landscape /var/log/landscape
 chown -R syslog:landscape /var/log/landscape-server
 
-printf "Starting rsyslogd\n"
+printf " * Starting rsyslogd\n"
 # starting as non-interactive mode will fail
 # seems to be a bug with rsyslogd itself
 rsyslogd -f /etc/rsyslog.conf -n -iNONE &
