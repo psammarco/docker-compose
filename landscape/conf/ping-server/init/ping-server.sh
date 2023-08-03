@@ -4,8 +4,7 @@
 # ----------------------------------------------------------
 # Start core component
 # ----------------------------------------------------------
-python3 /opt/canonical/landscape/pingserver --rundir=/opt/canonical/landscape \
---pidfile=/var/run/landscape/landscape-pingserver-1.pid
+/etc/init.d/landscape-pingserver start
 
 # Keep container alive
 tail -f /dev/null

@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Copying landscape config files
 ARG DEFAULTS=../app-server
 ARG BUILD=message-server
+ENV BUILD=$BUILD
 
 COPY $DEFAULTS/service.conf /etc/landscape
 COPY $DEFAULTS/rsyslog.conf /etc
@@ -13,4 +14,4 @@ COPY $BUILD/init/$BUILD.sh /scripts
 
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["/scripts/defaults.entrypoint.sh && /scripts/message-server.sh"]
+CMD ["/scripts/defaults.entrypoint.sh && /scripts/$BUILD.sh"]

@@ -113,6 +113,11 @@ services:
       - landscape_logs:/var/log/landscape
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
+    healthcheck:
+      test: ["CMD", "sh", "-c", "service landscape-appserver status | grep 'is running'"] 
+      interval: 15s
+      timeout: 5s
+      retries: 10 
 
   message-server:
     build:
@@ -132,7 +137,7 @@ services:
       rabbitmq:
         condition: service_healthy
       app-server:
-        condition: service_started
+        condition: service_healthy
     volumes:
       - landscape_data:/var/lib/landscape
       - landscape_logs:/var/log/landscape
@@ -157,7 +162,7 @@ services:
       rabbitmq:
         condition: service_healthy
       app-server:
-        condition: service_started
+        condition: service_healthy
     volumes:
       - landscape_data:/var/lib/landscape
       - landscape_logs:/var/log/landscape
@@ -182,7 +187,7 @@ services:
       rabbitmq:
         condition: service_healthy
       app-server:
-        condition: service_started
+        condition: service_healthy
     volumes:
       - landscape_data:/var/lib/landscape
       - landscape_logs:/var/log/landscape

@@ -25,6 +25,8 @@ RUN touch /var/log/landscape-server/update-alerts.log \
       /var/log/landscape-server/package-search.log \
       /var/log/landscape-server/appserver.log
 
+# Adjusting permissions for init scripts
+RUN chown -R landscape:landscape /var/run/landscape
 
 # Copying landscape config files
 COPY service.conf /etc/landscape

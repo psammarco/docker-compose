@@ -4,8 +4,7 @@
 # ----------------------------------------------------------
 # Start core component
 # ----------------------------------------------------------
-/opt/canonical/landscape/job-handler --rundir=/opt/canonical/landscape \
---pidfile=/var/run/landscape/landscape-job-handler-1.pid
+/etc/init.d/landscape-job-handler start
 
 # Keep container alive
 tail -f /dev/null
