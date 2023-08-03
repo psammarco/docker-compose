@@ -243,3 +243,29 @@ services:
       - landscape_logs:/var/log/landscape
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
+
+  package-upload:
+    build:
+      context: ./conf
+      dockerfile: ./package-upload/Dockerfile
+    container_name: pkgsrv
+    hostname: pkgsrv
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.10.0.100
+    environment:
+      SERVICE: PACKAGEUPLOADSERVER 
+    depends_on:
+      postgres_srv:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      app-server:
+        condition: service_healthy
+    volumes:
+      - landscape_data:/var/lib/landscape
+      - landscape_logs:/var/log/landscape
+      - landscape-server_data:/var/lib/landscape-server
+      - landscape-server_logs:/var/log/landscape-server
+
