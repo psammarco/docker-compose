@@ -17,5 +17,22 @@ printf " * Starting landcape-server setup\n"
 # ----------------------------------------------------------
 /usr/sbin/apachectl start
 
+# Enabling apache modules
+/usr/sbin/a2enmod proxy
+/usr/sbin/a2enmod headers
+/usr/sbin/a2enmod expires
+/usr/sbin/a2enmod rewrite
+
+# Disabling default vhost
+/usr/sbin/a2dissite 000-default
+
+# Enabling landscape vhost
+/usr/sbin/a2ensite landscape.conf
+
+# ----------------------------------------------------------
+# Restart apache2
+# ----------------------------------------------------------
+/usr/sbin/apachectl restart
+
 # Keep container alive
 tail -f /dev/null
