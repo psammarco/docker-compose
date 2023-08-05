@@ -3,6 +3,7 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Setting variables for apache landscape conf
+ENV DOMAIN=sms.poc.null
 ENV APPSERVER=172.10.0.40
 ENV MSGSERVER=172.10.0.50
 ENV PINGSERVER=172.10.0.60
