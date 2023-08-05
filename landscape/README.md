@@ -66,4 +66,6 @@ Several volumes have been created and assigned to their respective containers. T
 
 As this is intended to be a Proof of Concept, it is your responsibility to harden the whole stack, implement SSL, add redundancy, allocate the appropriate amount of resources to each component based on your needs, as well as scale some of the components depending on the number of clients the application will be managing and overall traffic.
 
+For more info please see the official [Landscape documentation](https://ubuntu.com/landscape/docs/manual-installation) from Canonical.
+
 Cheers!
