@@ -20,20 +20,6 @@ volumes:
   
 
 services: 
-  loadbalancer:
-    image: 'haproxy:lts'
-    container_name: lb1
-    hostname: lb1
-    networks:
-      backend:
-      frontend:
-        ipv4_address: 172.100.0.254
-    ports:
-      - "80"
-      - "70" # management console
-    volumes:
-      - ./conf/haproxy/lb1/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-
   postgres_srv:
     build:
       context: ./conf/postgres_srv

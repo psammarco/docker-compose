@@ -54,12 +54,12 @@ Also, the remaining components rely on the _APPSERVER_ to bootstrap the landscap
 ## Data and Volumes
 Several volumes have been created and assigned to their respective containers. These volumes hold essential data of the stack, providing you with the flexibility to back up and/or migrate the application whenever necessary.
 ```
-  postgres_data:
-  rabbitmq_data:
-  landscape_data:
-  landscape_logs:
-  landscape-server_data:
-  landscape-server_logs:
+  postgres_data
+  rabbitmq_data
+  landscape_data
+  landscape_logs
+  landscape-server_data
+  landscape-server_logs
 ```
 
 ## Final Notes
