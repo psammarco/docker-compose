@@ -11,5 +11,11 @@ printf " * Starting landcape-server setup\n"
 # ----------------------------------------------------------
 /etc/init.d/landscape-appserver start
 
+
+# ----------------------------------------------------------
+# Start apache2 
+# ----------------------------------------------------------
+/usr/sbin/apachectl start
+
 # Keep container alive
 tail -f /dev/null

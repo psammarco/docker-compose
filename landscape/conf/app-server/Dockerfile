@@ -44,7 +44,7 @@ RUN chown -R landscape:landscape /var/run/landscape
 COPY service.conf /etc/landscape
 COPY rsyslog.conf /etc 
 COPY init/ /scripts
-
+COPY apache.conf /etc/apache2/sites-available/landscape.conf
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["/scripts/defaults.entrypoint.sh && /scripts/app-server.sh"]

@@ -3,8 +3,8 @@
     # This Hostname is the hostname that users and Landscape clients will access
     # It must be the same as the DNS Hostname for this machine
     # It is not recommended that you use an IP address here...
-    ServerName ${DOMAIN}
-    ServerAdmin webmaster@${DOMAIN}
+    ServerName {{DOMAIN}}
+    ServerAdmin webmaster@{{DOMAIN}}
     # ErrorLog /var/log/apache2/landscape.error.log
     # CustomLog /var/log/apache2/landscape.access.log combined
     DocumentRoot /var/www/landscape
@@ -94,13 +94,13 @@
 
     RewriteRule ^/r/([^/]+)/(.*) /$2 
 
-    RewriteRule ^/ping$ http://${PINGSERVER$}:8070/ping [P]
-    RewriteRule ^/message-system http://${MSGSERVER$}:8090/ [P,L]
-    RewriteRule ^/ajax http://${ASYNC_FRONTEND$}:9090/ [P,L]
-    RewriteRule ^/combo(.*) http://${APPSERVER$}:8080/combo$1 [P,L]
-    RewriteRule ^/api http://${APISERVER$}:9080/ [P,L]
-    RewriteRule ^/attachment/(.*) http://${MSGSERVER$}:8090/attachment/$1 [P,L]
-    RewriteRule ^/upload/(.*) http://${PACKAGEUPLOADSERVER$}:9100/$1 [P,L]
+    RewriteRule ^/ping$ http://{{PINGSERVER}}:8070/ping [P]
+    RewriteRule ^/message-system http://{{MSGSERVER}}:8090/ [P,L]
+    RewriteRule ^/ajax http://{{ASYNC_FRONTEND}}:9090/ [P,L]
+    RewriteRule ^/combo(.*) http://{{APPSERVER}}:8080/combo$1 [P,L]
+    RewriteRule ^/api http://{{APISERVER}}:9080/ [P,L]
+    RewriteRule ^/attachment/(.*) http://{{MSGSERVER}}:8090/attachment/$1 [P,L]
+    RewriteRule ^/upload/(.*) http://{{PACKAGEUPLOADSERVER}}:9100/$1 [P,L]
 
     RewriteCond %{REQUEST_URI} !^/robots.txt$
     RewriteCond %{REQUEST_URI} !^/favicon.ico$
@@ -112,7 +112,7 @@
     # Replace the @hostname@ with the DNS hostname for this machine.
     # If you change the port number that Apache is providing SSL on, you must change the 
     # port number 443 here.
-    RewriteRule ^/(.*) http://${APPSERVER$}:8080/$1 [P]
+    RewriteRule ^/(.*) http://{{APPSERVER}}:8080/$1 [P]
 
     <Location />
         # Insert filter
