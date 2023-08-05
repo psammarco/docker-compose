@@ -2,6 +2,17 @@ FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Setting variables for apache landscape conf
+ENV APPSERVER=172.10.0.40
+ENV MSGSERVER=172.10.0.50
+ENV PINGSERVER=172.10.0.60
+ENV JOBHANDLER=172.10.0.70
+ENV ASYNC_FRONTEND=172.10.0.80
+ENV APISERVER=172.10.0.90
+ENV PACKAGEUPLOADSERVER=172.10.0.100
+ENV PACKAGESEARCH=172.10.0.110
+
+# Installing PREREQs
 RUN apt-get update && \
     apt-get install -y software-properties-common
 
