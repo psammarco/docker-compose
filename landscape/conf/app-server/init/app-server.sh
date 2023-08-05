@@ -19,6 +19,7 @@ printf " * Starting landcape-server setup\n"
 
 # Enabling apache modules
 /usr/sbin/a2enmod proxy
+/usr/sbin/a2enmod proxy_http
 /usr/sbin/a2enmod headers
 /usr/sbin/a2enmod expires
 /usr/sbin/a2enmod rewrite
