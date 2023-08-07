@@ -1,0 +1,9 @@
+This is still a work in progres.. The landscape-client fails during registration.
+
+
+// error:
+We were unable to contact the server.
+Your internet connection may be down. The landscape client will continue to try and contact the server periodically.
+
+
+It is obviously able to reach the APPSERVER. Needs investigating..
