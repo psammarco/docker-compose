@@ -1,0 +1,16 @@
+version: '3.9'
+
+networks:
+  default:
+    name: frontend
+
+services:
+  focal-client:
+    build:
+      context: ./conf/focal
+      dockerfile: Dockerfile
+    hostname: focal
+    networks:
+      default:
+        ipv4_address: 172.100.0.99
+
