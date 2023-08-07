@@ -2,10 +2,12 @@ version: '3.9'
 
 networks:
   frontend:
+    name: frontend
     ipam:
       config:
         - subnet: 172.100.0.0/24
   backend:
+    name: backend
     ipam:
       config:
         - subnet: 172.10.0.0/24
@@ -17,7 +19,6 @@ volumes:
   landscape_logs:
   landscape-server_data:
   landscape-server_logs:
-  
 
 services: 
   postgres_srv:
@@ -87,6 +88,8 @@ services:
     networks:
       backend:
         ipv4_address: 172.10.0.40
+      frontend:
+        ipv4_address: 172.100.0.10
     environment:
       SERVICE: APPSERVER
     depends_on:
@@ -101,6 +104,7 @@ services:
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
       - "sms.poc.null:172.10.0.40"
+      - "sms.poc.null:172.100.0.10"
     healthcheck:
       test: ["CMD", "sh", "-c", "service landscape-appserver status | grep 'is running'"] 
       interval: 15s
