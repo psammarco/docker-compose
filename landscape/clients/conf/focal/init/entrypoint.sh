@@ -2,17 +2,16 @@
 #
 
 # ----------------------------------------------------------
-# Start landscape-client daemon  
+# Setup client configuration and start init service 
 # ----------------------------------------------------------
-#/etc/init.d/landscape-client start
-
-# ----------------------------------------------------------
-# Setup client configuration 
-# ----------------------------------------------------------
-#landscape-config --computer-title "focal" --account-name standalone \
-#--url https://"$FRONTEND"/message-system --ping-url http://"FRONTEND"/ping \
-#--script-users=ALL --ok-no-register --silent
-
+landscape-config --computer-title "focal1" \
+        --account-name standalone \
+        --url http://"$FRONTEND"/message-system \
+        --ping-url http://"$FRONTEND"/ping \
+        --script-users=ALL \
+        --ok-no-register \
+        --tags=containers \
+        --silent
 
 # Keep contain alive
 tail -f /dev/null

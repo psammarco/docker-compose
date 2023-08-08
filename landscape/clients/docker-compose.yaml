@@ -5,12 +5,14 @@ networks:
     name: frontend
 
 services:
-  focal-client:
+  focal:
     build:
       context: ./conf/focal
       dockerfile: Dockerfile
+    container_name: focal
     hostname: focal
     networks:
       default:
         ipv4_address: 172.100.0.99
-
+    extra_hosts:
+      - "sms.poc.null:172.100.0.10"
