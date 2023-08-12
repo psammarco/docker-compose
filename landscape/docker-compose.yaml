@@ -62,6 +62,7 @@ services:
     image: 'rabbitmq:management'
     container_name: rabbitmq
     hostname: rabbitmq
+    restart: always
     networks:
       backend:
         ipv4_address: 172.10.0.30

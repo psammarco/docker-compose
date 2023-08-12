@@ -2,6 +2,7 @@ version: '3.9'
 
 networks:
   default:
+    external: true
     name: frontend
 
 services:
