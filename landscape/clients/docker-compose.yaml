@@ -16,4 +16,4 @@ services:
       default:
         ipv4_address: 172.100.0.99
     extra_hosts:
-      - "sms.poc.null:172.100.0.10"
+      - "landscape.poc.null:172.100.0.10"

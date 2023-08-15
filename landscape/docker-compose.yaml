@@ -104,8 +104,8 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
-      - "sms.poc.null:172.100.0.10"
+      - "landscape.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.100.0.10"
     healthcheck:
       test: ["CMD", "sh", "-c", "service landscape-appserver status | grep 'is running'"] 
       interval: 15s
@@ -137,7 +137,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
   ping-server:
     build:
@@ -164,7 +164,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
   job-handler:
     build:
@@ -191,7 +191,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
   
   async-frontend:
     build:
@@ -218,7 +218,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
   api-server:
     build:
@@ -245,7 +245,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
   package-upload:
     build:
@@ -272,7 +272,7 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
   package-search:
     build:
@@ -299,5 +299,5 @@ services:
       - landscape-server_data:/var/lib/landscape-server
       - landscape-server_logs:/var/log/landscape-server
     extra_hosts:
-      - "sms.poc.null:172.10.0.40"
+      - "landscape.poc.null:172.10.0.40"
 
