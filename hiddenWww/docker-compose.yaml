@@ -1,0 +1,16 @@
+version: '3.9'
+
+services: 
+  tor:
+    build:
+      context: ./config
+      dockerfile: Dockerfile
+    container_name: hiddenwww
+    hostname: hiddenwww
+    restart: always
+    cap_add:
+      - ALL
+    #volumes:
+     # - type: bind
+      #  source: /var/run/docker.sock
+       # target: /var/run/www.sock
