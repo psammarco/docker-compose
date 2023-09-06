@@ -9,7 +9,7 @@ services:
     hostname: hiddenwww
     restart: always
     cap_add:
-      - ALL
+      - NET_ADMIN 
     #volumes:
      # - type: bind
       #  source: /var/run/docker.sock
