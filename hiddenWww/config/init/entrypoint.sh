@@ -8,9 +8,9 @@
 # ----------------------------------------------------------
 # Move landing page to website dir 
 # ----------------------------------------------------------
-mkdir /var/lib/tor/hiddenservices/www
-chown -R debian-tor:debian-tor /var/lib/tor/hiddenservices/www
-mv /scripts/index.html /var/lib/tor/hiddenservices/www
+mkdir /var/lib/tor/main/hiddenservices/www
+chown -R debian-tor:debian-tor /var/lib/tor/main/hiddenservices/www
+mv /scripts/index.html /var/lib/tor/main/hiddenservices/www
 
 # ----------------------------------------------------------
 # Start nginx 

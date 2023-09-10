@@ -1,7 +1,7 @@
 User debian-tor
 UseBridges 1
 
-DataDirectory /var/lib/tor
+DataDirectory /var/lib/tor/main
 
 ControlSocket /run/tor/control GroupWritable RelaxDirModeCheck
 ControlSocketsGroupWritable 1
@@ -31,5 +31,5 @@ Log debug file /var/log/tor/debug.log
 RunAsDaemon 1
 
 # Tor httpd ServerRoot
-HiddenServiceDir /var/lib/tor/hiddenservices
+HiddenServiceDir /var/lib/tor/main/hiddenservices
 HiddenServicePort 80 unix:/var/run/tor/www.sock

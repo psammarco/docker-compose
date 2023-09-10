@@ -1,5 +1,8 @@
 version: '3.9'
 
+volumes:
+  tor:
+
 services: 
   tor:
     build:
@@ -10,7 +13,6 @@ services:
     restart: always
     cap_add:
       - NET_ADMIN 
-    #volumes:
-     # - type: bind
-      #  source: /var/run/docker.sock
-       # target: /var/run/www.sock
+    volumes:
+      - tor:/var/lib/tor
+
