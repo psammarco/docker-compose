@@ -11,16 +11,11 @@
 mkdir /var/lib/tor/hiddenservices/www
 chown -R debian-tor:debian-tor /var/lib/tor/hiddenservices/www
 mv /scripts/index.html /var/lib/tor/hiddenservices/www
-# ----------------------------------------------------------
-# Enable hiddenwww vhost
-# ----------------------------------------------------------
-a2dissite 000-default.conf
-a2ensite hiddenwww.conf
 
 # ----------------------------------------------------------
-# Start httpd 
+# Start nginx 
 # ----------------------------------------------------------
-/etc/init.d/apache2 start
+/etc/init.d/nginx start
 
 # ----------------------------------------------------------
 # ----------------------------------------------------------

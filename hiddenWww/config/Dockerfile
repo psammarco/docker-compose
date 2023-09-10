@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install -y software-properties-common \
     iptables-persistent \
     apt-transport-https \
-    apache2 \
+    nginx \
     curl
    
 # Adding Tor apt repo  
@@ -29,12 +29,16 @@ RUN mv /etc/tor/torrc /etc/tor/torrc.defaults
 COPY torrc /etc/tor
 COPY init/ /scripts
 
-# HiddenService stuff
-COPY apache2.conf /etc/apache2
+# Setup nginx to run as debian-tor
+RUN sed -i 's/www-data/debian-tor/g' /etc/nginx/nginx.conf
+
+# Enable hidden website in nginx 
+COPY hiddenwww.conf /etc/nginx/sites-available/www
+RUN ln -s /etc/nginx/sites-available/www /etc/nginx/sites-enabled/
+
 # Dirty workaround!!! Landing page is temporarily copied into /scripts
 # then moved to /var/lib/tor/www once tor daemon is started.
 COPY index.html /scripts
-COPY hiddenwww.conf /etc/apache2/sites-available
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["/scripts/entrypoint.sh"]
