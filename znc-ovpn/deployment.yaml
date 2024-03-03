@@ -1,0 +1,42 @@
+version: '3.9'
+
+networks:
+  bridged:
+    ipam:
+      config:
+        - subnet: 192.192.24.0/24
+
+volumes:
+  znc_config:
+  znc_startup:
+
+services: 
+  bouncer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: znc-ovpn
+    hostname: znc-ovpn
+    restart: unless-stopped
+    networks:
+      bridged:
+        ipv4_address: 192.192.24.24
+    dns:
+    # Quad9 DNS
+    - "9.9.9.9"
+    - "149.112.112.112"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - INTERFACE=tun0  # route container traffic to vpn interface
+    volumes:
+      - znc_config:/config
+      - znc_startup:/startup 
+    ports:
+      - "443"
+      - "8443"
+      - "7770"
+      - "6501:6501"
