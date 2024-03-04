@@ -9,6 +9,14 @@ This Docker Compose automation deploys the famous ZNC IRC bouncer to route all i
 + OpenVPN is started.
 + ZNC is executed as the admin user.
 
+## OpenVPN challengeless config
++ Make sure *"auth-user-pass /startup/creds.txt"* is added to your .ovpn config file.
+     - Credentials are provided as following:
+       ```
+       USERNAME
+       PASSWORD
+       ```
+
 ## ZNC Configurations
 + ZNC port is set to 6501.
 + Default username and password is *admin*. Change it immediately!
