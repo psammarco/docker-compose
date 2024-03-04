@@ -28,7 +28,6 @@ RUN mkdir /startup
 # Setting up znc with basic config
 RUN mkdir -p /config/configs
 COPY znc.conf.d/znc.conf /config/configs
-COPY znc.conf.d/znc.pem /config
 #
 COPY init.d/* /startup
 RUN chown -R admin:admin /config
