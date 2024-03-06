@@ -11,8 +11,8 @@ procps \
 sudo \
 znc
 
-## Creating unprivileged user
-RUN echo "*** create nologin user ***"
+## Creating nologin user for znc
+RUN echo "*** create nologin admin user ***"
 RUN useradd -s /sbin/nologin -d /config admin 
 ##
 
@@ -28,9 +28,11 @@ RUN mkdir /startup
 # Setting up znc with basic config
 RUN mkdir -p /config/configs
 COPY znc.conf.d/znc.conf /config/configs
+# Generates a pemfile for use with SSL 
+RUN znc -p -d /config
 #
 COPY init.d/* /startup
 RUN chown -R admin:admin /config
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["/startup/entrypoint.sh"] 
+CMD ["/startup/entrypoint.sh"]
