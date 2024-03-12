@@ -34,7 +34,7 @@ services:
     environment:
       - DOCKER_TLS_VERIFY=1
       - DOCKER_HOST=tcp://dind:2376
-      - DOCKER_TLS_CERT_PATH=/certs/client
+      - DOCKER_CERT_PATH=/certs/client
     ports:
       - 8080:8080
       - 50000:50000
