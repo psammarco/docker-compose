@@ -1,0 +1,30 @@
+version: '3.9'
+
+networks:
+  jenkins_jenkins:
+    external: true
+
+volumes:
+  home:
+  jenkins_certs:
+    external: true
+
+services:
+  agent:
+    build: .
+    container_name: jenkins-agent
+    restart: unless-stopped
+    networks:
+      - jenkins_jenkins
+    volumes:
+      - home:/home/jenkins
+      - jenkins_certs:/certs/client:ro
+    environment:
+      - TZ=Europe/London
+      - DOCKER_TLS_VERIFY=1
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - JENKINS_AGENT_NAME=worker-01
+      - JENKINS_URL=http://jenkins:8080
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+      - JENKINS_SECRET=2969cfab22fe84ecc75305f97792993ebb9b368f3f603f1fab0493752a06776f
