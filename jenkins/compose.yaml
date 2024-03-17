@@ -1,0 +1,37 @@
+version: '3.9'
+
+networks:
+  jenkins:
+
+volumes:
+  data:
+  certs:
+
+services:
+  docker:
+    image: docker:dind
+    privileged: true    # Necessary for running Docker inside Docker
+    restart: unless-stopped
+    networks:
+      jenkins:
+    volumes:
+      - certs:/certs/client
+    ports: 
+      - 2376:2376
+
+  jenkins:
+    build: .
+    container_name: jenkins
+    restart: unless-stopped
+    networks: 
+      jenkins:
+    volumes:
+      - data:/var/jenkins_home
+      - certs:/certs/client:ro
+    environment:
+      - DOCKER_TLS_VERIFY=1
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+    ports:
+      - 8080:8080
+      - 50000:50000
