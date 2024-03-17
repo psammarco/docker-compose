@@ -33,7 +33,7 @@ services:
       - certs:/certs/client:ro
     environment:
       - DOCKER_TLS_VERIFY=1
-      - DOCKER_HOST=tcp://dind:2376
+      - DOCKER_HOST=https://dind:2376
       - DOCKER_CERT_PATH=/certs/client
     ports:
       - 8080:8080
