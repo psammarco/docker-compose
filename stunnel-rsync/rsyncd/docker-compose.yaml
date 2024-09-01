@@ -1,0 +1,29 @@
+version: '3.9'
+
+volumes:
+  certs: {}
+
+networks:
+  rsyncd:
+    name: rsyncd
+
+services: 
+ rsyncd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stunnel-rsyncd # adds tagging
+    container_name: rsyncd
+    hostname: rsyncd
+    restart: unless-stopped
+    networks:
+      rsyncd:
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - ./keys:/certs:ro
+      - ./rsyncd.conf:/etc/rsyncd.conf:ro
+      - ./stunnel.conf:/etc/stunnel/stunnel.conf:ro
+    expose:
+      - "22222"
+

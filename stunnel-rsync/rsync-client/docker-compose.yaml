@@ -1,0 +1,24 @@
+version: '3.9'
+
+volumes:
+  certs: {}
+
+networks:
+  default:
+    external:
+      name: rsyncd
+
+services: 
+ rsync-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rsync-client # adds tagging
+    container_name: rsync-client
+    hostname: rsync
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/London
+      - RSYNCSRV=172.18.0.2
+    volumes:
+      - ./keys:/certs:ro
