@@ -21,6 +21,7 @@ Examples on how to generate the SSL certificates can be found in [genkeys.tar.gz
 This configuration allows rsyncd to run as a standard user. Running rsyncd as a non-root user has some limitations, such as the inability to preserve file privileges, and that data can only be synced to directories where the ***rsync*** user has read write permissions."
 
 To run rsync as root the following entries need to be removed/ changed from the configuration:
+
 **rsyncd/Dockerfile**
 ```
 libcap2-bin
