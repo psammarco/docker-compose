@@ -10,9 +10,9 @@ Be sure to update the **RSYNCSRV** variable on ***rsync-client/docker-compose.ya
 ```
 rsync -avz PATHTOFILE rsync@127.0.0.1::rsyncd1 --port=1873
 ```
-The above command can be translated as such: **[username]@[localhost:873]::ModuleName** . 
+The above command can be translated as such: **[username]@[localhost:1873]::ModuleName** . 
 
-The ***ModuleName*** is defined in ***rsyncd.conf*** on the rsyncd server configuration.
+Rsync modues are defined in ***rsyncd.conf*** on the rsyncd server configuration.
 
 ## Certificates
 Examples on how to generate the SSL certificates can be found in [genkeys.tar.gz](https://github.com/psammarco/kubernetes/blob/master/relp-rsyslog/genkeys.tar.gz).
